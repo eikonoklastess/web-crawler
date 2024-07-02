@@ -1,11 +1,13 @@
-import { normalizeURL, getURLsFromHTML } from './crawl.js';
+import { crawlPage } from './crawl.js';
+import { printReport } from './report.js';
 import { emitWarning, argv } from 'node:process';
 import { URL } from 'node:url';
 
 const args = argv;
 
-const main = (urlString) => {
-	return urlString;
+const main = async (urlString) => {
+	const pages = await crawlPage(urlString);
+	printReport(pages);
 }
 
 const isValidURL = (urlString) => {
